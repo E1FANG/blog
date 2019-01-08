@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .main{
+            width: 600px;
+            margin: 0 auto;
+        }
+        .h-table{
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #ccc;
+        }
+        tbody{
+            display: table-row-group;
+            vertical-align: middle;
+            border-color: inherit;
+        }
+        .h-table tr{
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        tr {
+            display: table-row;
+            vertical-align: inherit;
+            border-color: inherit;
+        }
+        tr{
+            height: 35px;
+        }
+        .h-table th {
+            color: #fff;
+            background-color: #4CAF50;
+            padding: 8px 8px;
+            font-weight: bold;
+        }
+        .h-table tr:nth-child(2n) {
+            background-color: #f1f1f1;
+        }
+        .one{
+            border: none;
+            margin-top:30px; 
+        }
+        table:nth-last-child(1) th{
+            color: black;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <table class="h-table">
+            <tbody>
+                <tr>
+                    <th>FirstName</th>
+                    <th>lastname</th>
+                    <th>point</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                </tr>
+                <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                </tr>
+                <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                </tr>
+                <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="h-table one">
+                <tbody>
+                    <tr>
+                        <th>FirstName</th>
+                        <th>lastname</th>
+                        <th>point</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                    </tr>
+                    <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                    </tr>
+                    <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                    </tr>
+                    <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+</body>
+</html>
