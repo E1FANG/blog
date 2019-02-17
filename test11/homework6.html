@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>居中</title>
+  <style>
+    .box{
+      height: 500px;
+      width: 500px;
+      margin: 0 auto;
+      border: red 2px solid;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .box::before{
+      content: "";
+      vertical-align: middle;
+      height: 100%;
+      display: inline-block;
+    }
+    img{
+      vertical-align: middle;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <img src="http://cloud.hunger-valley.com/17-10-23/76238935.jpg" alt="">
+  </div>
+</body>
+
+</html>
