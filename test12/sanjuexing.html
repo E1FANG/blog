@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .diglog {
+            height: 100px;
+            width: 100px;
+            border: 1px solid #999999;
+            margin: 0 auto;
+            top: calc(5%);
+            left:calc(25%);
+            position: absolute;
+        }
+
+        .diglog:before {
+            content: "";
+            height: 0px;
+            width: 0px;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 15px solid pink;
+            border-right: 15px solid transparent;
+            transform: rotate(270deg);
+            position: relative;
+            top: -30px;
+            left: 15px;
+            display: inline-block;
+        }
+
+        .diglog2 {
+            height: 100px;
+            width: 100px;
+            border: 1px solid #999999;
+            margin: 0 auto;
+            top: calc(25%);
+            left:calc(25%);
+            position: absolute;
+        }
+
+        .diglog2:before {
+            content: "";
+            height: 0px;
+            width: 0px;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 15px solid pink;
+            border-right: 15px solid transparent;
+            transform: rotate(315deg);
+            position: relative;
+            top: -15px;
+            left: 85px;
+            display: inline-block;
+        }
+        .diglog3 {
+            height: 100px;
+            width: 100px;
+            border: 1px solid #999999;
+            margin: 0 auto;
+            top: calc(45%);
+            left:calc(25%);
+            position: absolute;
+        }
+
+        .diglog3:before {
+            content: "";
+            height: 10px;
+            width: 10px;
+            border-top: 1px solid #999999;
+            border-left: 1px solid #999999;
+            background-color: #fff;
+            transform: rotate(45deg);
+            position: relative;
+            top: -12px;
+            left: 15px;
+            display: inline-block;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="diglog"></div>
+    <div class="diglog2"></div>
+    <div class="diglog3"></div>
+</body>
+
+</html>
