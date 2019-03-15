@@ -1,0 +1,108 @@
+header {
+    position: absolute;
+    top: 10px;
+    width: 100%;
+}
+
+header .login {
+    float: right;
+    margin-right: 20px;
+    font-size: 20px;
+}
+
+.flip-model {
+    display: none;
+}
+
+.show {
+    display: block !important;
+}
+
+.model {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 16px;
+    background-color: #fff;
+    box-shadow: 0 3px 4px 5px rgba(0, 0, 0, 0.2);
+}
+
+.model-login,
+.model-register {
+    background: #fff;
+    padding: 10px;
+}
+
+.model .tabs {
+    text-align: center;
+}
+
+.model .tabs a {
+    display: inline-block;
+    font-size: 16px;
+    margin: 0 10px;
+    color: #666;
+}
+
+.model .tabs a.active {
+    border-bottom: 2px solid #444;
+    color: #444;
+}
+
+.model .close {
+    position: absolute;
+    right: 30px;
+    top: -8px;
+}
+
+.content {
+    padding: 20px 40px;
+}
+
+.input-container {
+    position: relative;
+    margin-top: 10px;
+}
+
+.model input[type=text],
+.model input[type=password] {
+    width: 100%;
+    padding: 10px 10px 10px 28px;
+    outline: none;
+}
+
+.model input[type=submit] {
+    padding: 6px 10px;
+    border: none;
+    background: #fff;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
+    outline: none;
+}
+
+
+.model .fa {
+    position: absolute;
+    left: 14px;
+    top: 12px;
+}
+
+.model .errormsg {
+    color: #ff9800;
+    font-size: 12px;
+}
+
+
+.flip-model.login .model-login,
+.flip-model.register .model-register {
+  transform: translate(-50%,-50%) rotateY(0deg);
+  backface-visibility: hidden;
+  transition: all 1s;
+}
+.flip-model.login .model-register,
+.flip-model.register .model-login{
+  transform: translate(-50%,-50%) rotateY(180deg);
+  backface-visibility: hidden;
+  transition: all 1s;
+}
