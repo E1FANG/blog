@@ -1,0 +1,31 @@
+1，分析网页结构
+	如该网页：分三部分，header main footer
+
+
+2，从上往下逐步分析并填充内容
+	如：第一步分析header的内容：
+		有logo  导航  banner（一些字体）
+
+3，以上写的都只是html，分析并写完header的html后，写它的CSS（外部文件引入）
+	（写之前最好先写reset.css，还有通用样式common.css 如：清除浮动的样式）
+
+
+4，给header部分设置占据整个首屏(也要给html和body设置高度)
+	header {
+		height:100%;
+	}
+	html,body{
+		height:100%;
+	}
+
+5，设置背景图片
+
+6，logo和导航的样式。
+	要点：清除浮动 因为logo和导航都是有浮动的，所以父元素是不占据位置的就是没有撑开高度，
+	所以要清除浮动一面影响之后的布局。
+
+7，layout
+	用一个layout的样式来框住logo，导航等内容，使其跟浏览器边界有边距并居中。写在common.css样式中
+
+8，intro的内容 居中  要点：a标签的button样式要用inline-block，这样才可以用margin，而且方便复用，
+			   如果单单用block的话，会占据一行，第二按钮无法跟其并在一排；

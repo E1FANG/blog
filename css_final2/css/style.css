@@ -1,0 +1,404 @@
+html,
+body {
+    height: 100%;
+}
+
+header {
+    position: relative;
+    height: 100%;
+    min-height: 600px;
+    background: #000 url(../imgs/images/bg.jpg) center center no-repeat;
+    background-size: cover;
+}
+
+header .logo {
+    color: #ae2a1b;
+    font-size: 32px;
+    float: left;
+    margin-top: 10px;
+}
+
+header .nav {
+    float: right;
+    margin-left: 30px;
+}
+
+header .nav>li {
+    float: left;
+    margin: 20px;
+}
+
+header .nav a {
+    padding: 5px;
+    display: inline-block;
+    font-size: 20px;
+    border-radius: 4px;
+    color: black;
+}
+header .nav>li:last-child{
+    background: #ae2a1b;
+    color: white;
+}
+
+header .nav a:hover {
+    background: #ae2a1b;
+    color: white;
+}
+
+header .intro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #4e4e4e;
+}
+
+header .intro h1 {
+    width: 47%;
+    font-size: 16px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+header .intro h2 {
+    font-size: 32px;
+}
+
+header .intro .button {
+    margin-top: 20px;
+}
+
+section {
+    text-align: center;
+    margin-top: 30px;
+    padding: 105px 0 50px 0;
+}
+
+section>h2 {
+    font-size: 40px;
+}
+
+section>p {
+    /* font-size: 32px; */
+    margin-top: 10px;
+}
+
+section>ul .iconfont {
+    font-size: 80px;
+    columns: #333333;   
+}
+
+section .family-intro>li {
+    float: left;
+    width: 33.333%;
+    padding: 10px 20px;
+    ;
+}
+
+section>ul p {
+    margin-top: 10px;
+}
+
+section .family figure {
+    width: calc(33.33% - 20px);
+
+    float: left;
+    margin: 10px;
+}
+
+section .family figure a {
+    display: block;
+    /* height: 80%; */
+    position: relative;
+}
+
+section .family figure a:hover{
+    background-color: #fed136;
+    opacity: 0.8;  
+}
+section .family figure a:hover img{
+    opacity: 0;
+}
+section .family figure a:hover .icon-jiahao{
+    display: block;
+}
+section .family figure a img {
+    width: 100%;
+    height: 100%;
+}
+section .family .icon-jiahao{
+    position: absolute;
+    left: calc(50% - 21px);
+    top:  calc(50% - 21px);
+    font-size: 42px;
+    font-weight: bold;
+    color: #fff;
+    display: none;
+}
+
+section .family figcaption {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+section .family p {
+    color: #666;
+    margin-top: 10px;
+}
+
+
+
+section .timeline img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid lightblue;
+}
+
+section .timeline>li::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+section .timeline>li {
+    position: relative;
+    margin-top: 80px;
+}
+
+section .timeline>li:nth-child(odd) {
+    padding-right: calc(50% - 50px);
+    text-align: right;
+}
+
+section .timeline>li:nth-child(odd)>dl {
+    margin-right: 120px;
+}
+
+section .timeline>li:nth-child(odd) img {
+    float: right;
+}
+
+section .timeline>li:nth-child(even) {
+    padding-left: calc(50% - 50px);
+    text-align: left;
+}
+
+section .timeline>li:nth-child(even)>dl {
+    margin-left: 120px;
+}
+
+section .timeline>li:nth-child(even) img {
+    float: left;
+}
+
+section .timeline>li dt {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+section .timeline>li dd:nth-child(2) {
+    color: #666;
+}
+
+section .timeline>li::before {
+    content: "";
+    display: inline-block;
+    height: 120px;
+    width: 2px;
+    background-color: lightblue;
+    position: absolute;
+    left: 50%;
+    top: 100px;
+}
+
+section .timeline>li:nth-last-of-type(1):before {
+    height: 0px;
+}
+
+section .timeline>li:nth-last-of-type(1)>span {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid lightblue;
+    display: inline-block;
+    text-align: center;
+    padding-top: 35px;
+    background-color: lightblue;
+}
+
+section .player {
+    width: calc(33.3% - 22px);
+    margin: 10px;
+    float: left;
+}
+
+section .player img {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    margin-top: 50px;
+}
+
+section .player .contact {
+    width: 100%;
+}
+
+section .player li {
+    display: inline-block;
+}
+
+section .player li>a {
+    display: block;
+    width:60%;
+    height: 100%;
+    margin: 20px;
+    background-color: #333;
+    border-radius: 50%;
+    float: left;
+    text-align: center;
+}
+section .player li>a .iconfont{
+    font-size: 28px;
+    color: aliceblue;
+}
+section .player li>a:hover{
+    background-color:#ae2a1b;
+}
+section .player-word {
+    width: 500px;
+    height: 70px;
+    display: inline-block;
+    line-height: 35px;
+}
+article {
+    height: 15%;
+}
+article .logo-list {
+    width: 100%;
+    margin: 0 auto;
+}
+article .logo-list  li {
+    float: left;
+    width:calc(25% - 40px);
+    margin: 20px;
+}
+#contact {
+    padding: 0;
+    height: 80%;
+    background: #000 url(../imgs/zelas.jpg) center center no-repeat;
+    position: relative;
+}
+.center-css{
+    position: absolute;
+    top: 20%;
+    left: calc(50% - 500px);
+}
+#contact h2 {
+    color: #ae2a1b;
+    font-size: 48px;
+}
+#contact p {
+    color: #ae2a1b;
+    font-size: 28px;
+}
+.container{
+    padding-top: 50px;
+}
+#contact form {
+    margin: 0 auto;
+}
+.contact-form > div{
+    float: left;
+}
+.contact-form .personal{
+    width: calc(50% - 20px);
+    margin: 10px;
+}
+.contact-form .personal .message{
+    margin-bottom: 30px;
+}
+.contact-form .personal  .message input{
+    display: block;
+    width: 100%;
+    height: 50px;
+    padding: 10px 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.contact-form .personal-mes{
+    width: calc(50% - 20px);
+    margin: 10px;
+}
+.contact-form .personal-mes textarea{
+    display: block;
+    width: 100%;
+    height: 210px;
+    padding: 10px 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+footer .footer-part{
+    width: 33.3%;
+    float: left;
+    margin: 0 auto;
+}
+.copyright {
+    line-height: 88px;
+    text-align: center;
+}
+footer .contact {
+    width: 100%;
+    padding-left: 60px;
+}
+
+footer .contact li {
+    display: inline-block;
+}
+
+footer .contact li>a {
+    display: block;
+    width:60%;
+    height: 100%;
+    margin: 20px;
+    background-color: #333;
+    border-radius: 50%;
+    float: left;
+    text-align: center;
+}
+footer .contact li>a .iconfont{
+    font-size: 28px;
+    color: aliceblue;
+}
+footer .contact li>a:hover{
+    background-color:#ae2a1b;
+}
+
+footer .footer-links {
+    line-height: 88px;
+    text-align: center;
+    height: 88px;
+}
+footer .footer-links li{
+    float: left;
+    width: 50%;
+}
+footer .footer-links li a {
+    color: #ae2a1b;
+}
+footer .footer-links li a:hover{
+    text-decoration: underline;
+}

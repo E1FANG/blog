@@ -1,0 +1,45 @@
+/* reset */
+body,h1,h2,h3,h4,h5,h6,p,ul,li,dl,dt,dd {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a {
+    text-decoration: none;
+}
+ul {
+    list-style: none;
+}
+
+/* common css */
+.clearfix::after{
+    content: " ";
+    clear: both;
+    display: block;
+}
+.button {
+    color: #fff;
+    background:  #ae2a1b;
+    padding: 12px 30px; 
+    border-radius: 5px;
+    font-size: 16px;
+    display: inline-block;
+}
+.button:hover {
+    opacity: 0.8;
+}
+
+.layout{
+    width: 1000px;
+    margin: 0 auto;
+}
+body{
+    font: 14px/1.5 Arial;
+    background-color:#fff;
+    color: #444;
+}
