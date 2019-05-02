@@ -1,0 +1,89 @@
+.cover {
+  background: url(https://y.gtimg.cn/music/photo_new/T002R800x800M000001xOlLf0wYWYG.jpg?max_age=2592000)
+    center center no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  filter: blur(10px);
+  z-index: -1;
+}
+
+.musicbox {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  /* font-family: cursive; */
+  font-size: 16px;
+  color: white;
+  width: 650px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px; 
+  padding: 30px;
+}
+.music-list {
+  list-style: none;
+}
+
+.list-item {
+  display: flex;
+  margin-top: 10px;
+}
+.song-name {
+  flex: 0.6;
+}
+.song-auther {
+  flex: 0.2;
+}
+.song-time {
+  flex: 0.2;
+  text-align: right;
+}
+
+.controlbox {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 150px;
+}
+.control {
+  display: flex;
+}
+.iconfont {
+  font-size: 36px !important;
+}
+.play,
+.forward {
+  margin-left: 30px;
+}
+
+
+.music-msg{
+    display: flex;
+    flex-direction: column;
+}
+.mes{
+  display: flex;
+  justify-content: space-between;
+}
+.mes-1{
+  height: 20px;
+  display: flex;
+}
+.auther{
+  margin-left: 30px;
+}
+.bar {
+  height: 5px;
+  margin-top: 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  width: 400px;
+}
+
+.progress-now {
+  background-color: #ffaca9;
+  height: 5px;
+  width: 10px;
+  position: relative;
+}
