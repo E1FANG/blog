@@ -1,0 +1,484 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="//unpkg.com/jquery@1.9.1/jquery.min.js"></script>
+  <meta charset="utf-8">
+<!--
+Created using JS Bin
+http://js.jirengu.com
+
+Copyright (c) 2019 by anonymous (http://js.jirengu.com/jufativixa/3/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+
+  <title>GitHub 看板</title>
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_440195_fw8hsnrso53wstt9.css
+">
+ <meta name="referrer" content="never">
+  <style>
+  
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    a {
+      text-decoration: none;
+      color: #333;
+    }
+    html,body,main{
+      height: 100%;
+      position: relative;
+    }
+    body{
+      font-size: 12px;
+      line-height: 1.2;
+    }
+    main>section {
+      height: calc(100% - 45px);
+      padding: 10px;
+      background: #fff;
+      overflow: scroll;
+      -webkit-overflow-scrolling: touch; /*ios 上增加弹性*/
+    }
+    main>section{
+      display: none;
+    }
+    main section:first-child{
+      display: block;
+    }
+    .item {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+      padding-top: 10px;
+      display: flex;
+    }
+    .item .cover,
+    .item .cover img{
+      width: 50px;
+      border-radius: 4px;
+    }
+    .item>a{
+      display: flex;
+    }
+    .item .order {
+      display: flex;
+      align-items: center;
+    }
+    .item .order span{
+      padding: 0 4px;
+      color: #fff;
+      background: green;
+    }
+    .item .detail {
+      padding-left: 10px;
+    }
+    .item .detail h2{
+      font-size: 16px;
+    }
+    .item .detail .extra{
+      color: #999;
+      margin-top: 4px;
+    }
+    .item .detail .score{
+      color: #FF5722;
+    }
+    .loading {
+      text-align: center;
+      padding-top: 10px;
+      display: none;
+    }
+    
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg);  }
+    }
+    #search {
+      height: calc(100% - 45px);
+    }
+    section .search-area{
+      color: #333;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ccc;
+      position: relative;
+    }
+    section .search-area input {
+      width: calc(100% - 50px);
+      padding: 8px;
+      background-color: #eee;
+      border: none;
+      border-radius: 2px;
+      box-shadow: none;
+      outline: none;
+    }
+    section .search-area .button{
+      position: absolute;
+      right: 0;
+      padding: 8px 10px;
+      background: #FF5722;
+      color: #fff;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+    .loading .iconfont{
+      display: inline-block;
+      animation: 1s rotate linear infinite;
+    }
+    footer {
+      position: absolute;
+      bottom: 0;
+      height: 45px;
+      width: 100%;
+      border-top: 1px solid #ccc;
+      background-color: #fff;
+      display: flex;
+    }
+    footer>div {
+      flex: 1;
+      font-size: 12px;
+      text-align: center;
+      color: #666;
+      padding-top: 6px;
+    }
+    footer .active{
+      color: #FF5722;
+    }
+    footer>div>span{
+      display: block;
+    } 
+  </style>
+</head>
+<body>
+  <main>
+    <section id="repo-board">
+      <div class="container">  
+        <!--
+         <div class="item">
+          <a href="https://github.com/TryGhost/Ghost">
+            <div class="order"><span>1</span></div>
+            <div class="detail">
+              <h2>Ghost </h2>
+              <div class="extra">Knockout makes it easier to create rich, responsive UIs with JavaScript</div>
+              <div class="extra">4196 star</div>
+            </div>
+          </a>
+        </div> -->
+      </div>
+      <div class="loading"><span class="iconfont icon-loading"></span></div>
+    </section>
+    <section id="user-board">
+      <div class="container">
+        
+      </div>
+      <div class="loading"><span class="iconfont icon-loading"></span></div>
+    </section>
+    <section id="search">
+      <div class="wrap">
+        <div class="search-area">
+          <input type="text" placeholder="Search repos"><span class="button"> Search</span>
+        </div>
+        <div class="search-result">
+          <div class="container"></div>
+          <div class="loading"><span class="iconfont icon-loading"></span> </div>
+        </div>        
+      </div>
+
+    </section>
+  </main>
+  <footer>
+    <div class="active">
+      <span class="iconfont icon-paihang"></span><span>Top repos</span>
+    </div>
+    <div>
+      <span class="iconfont icon-beimei"></span><span>Top users</span>
+    </div>
+    <div>
+      <span class="iconfont icon-search"></span><span>Search</span>
+    </div>
+ 
+  </footer>
+  
+  <script>
+
+    var Helpers = {
+      isToBottom: function($viewport, $content) {
+        return $viewport.height() + $viewport.scrollTop() + 30 > $content.height() 
+      }
+    }
+
+
+    var Paging = {
+      init: function(){
+        this.$tabs = $('footer>div')
+        this.$pages = $('main>section')
+        this.bind()
+      },
+      bind: function(){
+        var _this = this
+        this.$tabs.on('click', function(){
+          var $this = $(this)
+          var index = $this.index()
+          $this.addClass('active')
+            .siblings().removeClass('active')
+          _this.$pages.eq(index).fadeIn().siblings().fadeOut()
+        })
+      }
+    }
+
+    var RepoBoard= {
+      init: function(){
+        var _this = this
+        this.$container = $('#repo-board')
+        this.$content = this.$container.find('.container')
+        this.page = 1
+        this.count = 30
+        this.isFinshed = false
+        this.isLoading = false
+        this.bind()
+        this.getData(function(result){
+          _this.renderData(result.data)
+          _this.page++
+        })
+      },
+      bind: function(){
+        var _this = this
+
+        this.$container.on('scroll', function(){
+          console.log(_this.isLoading)
+          if(Helpers.isToBottom(_this.$container, _this.$content) && !_this.isFinshed && !_this.isLoading){
+            console.log('to bottom')
+            _this.getData(function(result){
+              _this.renderData(result.data)
+              _this.page++
+              if(_this.page * _this.count > result.data.total_count ) {
+                _this.isFinshed = true
+              }
+            })
+          }
+        })
+      },
+      getData: function(callback){
+        var _this = this
+        this.isLoading = true
+        this.$container.find('.loading').show(400)
+        $.ajax({
+          url: 'https://api.github.com/search/repositories?q=language:javascript&sort=stars&order=desc',
+          data: {
+            page: this.page
+          },
+          dataType: 'jsonp'
+        }).done(function(ret){
+          _this.isLoading = false
+          _this.$container.find('.loading').hide(400)
+          callback(ret)
+        })
+      },
+      renderData(data){
+        var _this = this
+        data.items.forEach(function(item, index){
+          var $node = _this.createNode(item, (_this.page-1)*_this.count+index+1)
+          _this.$content.append($node)    
+        })
+      },
+      createNode: function(subject, index){
+        var $node = $(`<div class="item">
+          <a href="https://github.com/TryGhost/Ghost">
+            <div class="order"><span>1</span></div>
+            <div class="detail">
+              <h2>Ghost </h2>
+              <div class="description">Knockout makes it easier to create rich, responsive UIs with JavaScript</div>
+              <div class="extra"><span class="star-count">4196</span> star</div>  
+           </div>
+         </a>
+        </div> `)
+        $node.find('.order span').text(index)
+        $node.find('a').attr('href', subject.html_url)    
+        $node.find('.detail h2').text(subject.name)  
+        $node.find('.detail .description').text(subject.description)
+        $node.find('.detail .collection').text(subject.collect_count)  
+        $node.find('.detail .star-count').text(subject.stargazers_count ) 
+        return $node
+      }
+
+    }
+
+    var UserBoard = {
+      init: function(){
+        var _this = this
+        this.$container = $('#user-board')
+        this.$content = this.$container.find('.container')
+        this.page = 1
+        this.count = 30
+        this.isFinshed = false
+        this.isLoading = false
+        this.bind()
+        this.getData(function(result){
+          _this.renderData(result.data)
+          _this.page++
+        })
+      },
+      bind: function(){
+        var _this = this
+
+        this.$container.on('scroll', function(){
+          console.log(_this.isLoading)
+          if(Helpers.isToBottom(_this.$container, _this.$content) && !_this.isFinshed && !_this.isLoading){
+            console.log('to bottom')
+            _this.getData(function(result){
+              _this.renderData(result.data)
+              _this.page++
+              if(_this.page * _this.count > result.data.total_count ) {
+                _this.isFinshed = true
+              }
+            })
+          }
+        })
+      },
+      getData: function(callback){
+        var _this = this
+        this.isLoading = true
+        this.$container.find('.loading').show(400)
+        $.ajax({
+          url: 'https://api.github.com/search/users?q=followers:>1000+location:china+language:javascript',
+          data: {
+            page: this.page
+          },
+          dataType: 'jsonp'
+        }).done(function(ret){
+          _this.isLoading = false
+          _this.$container.find('.loading').hide(400)
+          callback(ret)
+        })
+      },
+      renderData(data){
+        var _this = this
+        data.items.forEach(function(item, index){
+          var $node = _this.createNode(item, (_this.page-1)*_this.count+index+1)
+          _this.$content.append($node)    
+        })
+      },
+      createNode: function(subject, index){
+        var $node = $(`<div class="item">
+          <a href="https://github.com/TryGhost/Ghost">
+            <div class="cover"><img src="" alt=""></div>
+            <div class="detail">
+            <h2>Ghost </h2>
+          </a>
+        </div> `)
+        $node.find('.cover img').attr('src', subject.avatar_url )
+        $node.find('a').attr('href', subject.html_url )    
+        $node.find('.detail h2').text(subject.login )  
+        return $node
+      }
+
+    }
+
+    var Search = {
+      init: function() {
+        this.page = 1
+        this.count = 30
+        this.isFinshed = false
+        this.isLoading = false
+        this.$container = $('#search')
+        this.$content = this.$container.find('.container')
+        this.bind()
+      },
+
+      bind: function() {
+        var _this = this
+        this.$container.find('.search-area .button').on('click', function(){
+          _this.getData(function(result){
+            _this.renderData(result.data)
+          })
+        })
+        console.log(this.$container.find('.search-area input'))
+        this.$container.find('.search-area input').on('keyup', function(e){
+          if(e.key === 'Enter') {
+            _this.getData(function(result){
+            _this.renderData(result.data)
+          })
+          }
+        })
+
+        this.$container.on('scroll', function(){
+          console.log(_this.isLoading)
+          if(Helpers.isToBottom(_this.$container, _this.$container.find('.wrap')) && !_this.isFinshed && !_this.isLoading){
+            console.log('to bottom')
+            _this.getData(function(result){
+              _this.renderData(result.data)
+              _this.page++
+              if(_this.page * _this.count > result.data.total_count) {
+                _this.isFinshed = true
+              }
+              
+            })
+          }
+        })
+      },
+
+      getData: function(callback){
+        var _this = this
+        var keyword = this.$container.find('.search-area input').val()
+        this.isLoading = true
+        $.ajax({
+          url: `https://api.github.com/search/repositories?q=${keyword}+language:javascript&sort=stars&order=desc&page=${_this.page}`,
+          dataType: 'jsonp'
+        }).done(function(ret){
+          _this.isLoading = false
+          callback(ret)
+        })
+      },
+
+      renderData(data){
+        var _this = this
+        data.items.forEach(function(item, index){
+          var $node = _this.createNode(item, (_this.page-1)*_this.count+index+1)
+          _this.$content.append($node)    
+        })
+      },
+      createNode: function(subject, index){
+        var $node = $(`<div class="item">
+          <a href="https://github.com/TryGhost/Ghost">
+            <div class="order"><span>1</span></div>
+            <div class="detail">
+              <h2>Ghost </h2>
+              <div class="description">Knockout makes it easier to create rich, responsive UIs with JavaScript</div>
+              <div class="extra"><span class="star-count">4196</span> star</div>  
+           </div>
+         </a>
+        </div> `)
+        $node.find('.order span').text(index)
+        $node.find('a').attr('href', subject.html_url)    
+        $node.find('.detail h2').text(subject.name)  
+        $node.find('.detail .description').text(subject.description)
+        $node.find('.detail .collection').text(subject.collect_count)  
+        $node.find('.detail .star-count').text(subject.stargazers_count ) 
+        return $node
+      }
+    }
+
+
+
+
+    var App = {
+      init: function(){
+        Paging.init()
+        RepoBoard.init()
+        UserBoard.init()
+        Search.init()
+      }
+    }
+
+    App.init()
+
+    
+  </script>
+<script src="http://js.jirengu.com/js/render/edit.js?3.25.5"></script>
+<script>jsbinShowEdit && jsbinShowEdit({"static":"http://js.jirengu.com","root":"http://js.jirengu.com"});</script>
+</body>
+</html>

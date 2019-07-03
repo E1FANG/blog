@@ -96,14 +96,17 @@ var top250 = {
       _this.$element.find(".container").append($node);
     });
   },
-  isToBottom: function(){
-    return this.$element.find('.container') <= this.$element.height() + this.$element.scrollTop() + 10
+  isToBottom: function() {
+    return (
+      this.$element.find(".container") <=
+      this.$element.height() + this.$element.scrollTop() + 10
+    );
   }
 };
 
 var usBox = {
   init: function() {
-    this.$element = $('.beimei')
+    this.$element = $(".beimei");
   },
   start: function() {
     var _this = this;
@@ -136,8 +139,7 @@ var usBox = {
   render: function() {
     var _this = this;
     data.subjects.forEach(function(movie) {
-
-      movie = subjects.movie          //数据嵌套了两层
+      movie = subjects.movie; //数据嵌套了两层
 
       var tpl = `<div class="item">
               <a href="#">
@@ -184,52 +186,55 @@ var usBox = {
       });
       _this.$element.find(".container").append($node);
     });
-  },
+  }
 };
 
 var search = {
-  init: function(){
-    console.log('usBox ok')
-    this.$element = $('#search')
-    this.keyword = ''
-    this.bind()
-    this.start()
+  init: function() {
+    console.log("usBox ok");
+    this.$element = $("#search");
+    this.keyword = "";
+    this.bind();
+    this.start();
   },
 
-  bind: function(){
-    var _this = this
-    this.$element.find('.button').click(function(){
-      _this.keyword = _this.$element.find('input').val()
-      _this.start()
-    })
+  bind: function() {
+    var _this = this;
+    this.$element.find(".button").click(function() {
+      _this.keyword = _this.$element.find("input").val();
+      _this.start();
+    });
   },
-  start: function(){
-    var _this = this
-    this.getData(function(data){
-      _this.render(data)
-    })
+  start: function() {
+    var _this = this;
+    this.getData(function(data) {
+      _this.render(data);
+    });
   },
-  getData: function(callback){
-    var _this = this
-    _this.$element.find('.loading').show()
+  getData: function(callback) {
+    var _this = this;
+    _this.$element.find(".loading").show();
     $.ajax({
-      url: 'http://api.douban.com/v2/movie/search',
+      url: "http://api.douban.com/v2/movie/search",
       data: {
         q: _this.keyword
       },
-      dataType: 'jsonp'
-    }).done(function(ret){
-      callback&&callback(ret)
-    }).fail(function(){
-      console.log('数据异常')
-    }).always(function(){
-      _this.$element.find('.loading').hide()
-    })  
+      dataType: "jsonp"
+    })
+      .done(function(ret) {
+        callback && callback(ret);
+      })
+      .fail(function() {
+        console.log("数据异常");
+      })
+      .always(function() {
+        _this.$element.find(".loading").hide();
+      });
   },
-  render: function(data){
-    var _this = this
-    console.log(data)
-    data.subjects.forEach(function(movie){
+  render: function(data) {
+    var _this = this;
+    console.log(data);
+    data.subjects.forEach(function(movie) {
       var template = `<div class="item">
     <a href="#">
     <div class="cover">
@@ -243,34 +248,33 @@ var search = {
     <div class="extra">主演: <span class="actor"></span></div>
   </div>
   </a>
-  </div>`
-      var $node = $(template)
-      $node.find('a').attr('href', movie.alt)
-      $node.find('.cover img')
-      .attr('src', movie.images.medium )
-      $node.find('.detail h2').text(movie.title)
-      $node.find('.score').text(movie.rating.average )
-      $node.find('.collect').text(movie.collect_count )
-      $node.find('.year').text(movie.year)
-      $node.find('.type').text(movie.genres.join(' / '))
-      $node.find('.director').text(function(){
-        var directorsArr = []
-        movie.directors.forEach(function(item){
-          directorsArr.push(item.name)
-        })
-        return directorsArr.join('、')
-      })
-      $node.find('.actor').text(function(){
-        var actorArr = []
-        movie.casts.forEach(function(item){
-          actorArr.push(item.name)
-        })
-        return actorArr.join('、')
-      })
-      _this.$element.find('.search-result').append($node)
-    })
+  </div>`;
+      var $node = $(template);
+      $node.find("a").attr("href", movie.alt);
+      $node.find(".cover img").attr("src", movie.images.medium);
+      $node.find(".detail h2").text(movie.title);
+      $node.find(".score").text(movie.rating.average);
+      $node.find(".collect").text(movie.collect_count);
+      $node.find(".year").text(movie.year);
+      $node.find(".type").text(movie.genres.join(" / "));
+      $node.find(".director").text(function() {
+        var directorsArr = [];
+        movie.directors.forEach(function(item) {
+          directorsArr.push(item.name);
+        });
+        return directorsArr.join("、");
+      });
+      $node.find(".actor").text(function() {
+        var actorArr = [];
+        movie.casts.forEach(function(item) {
+          actorArr.push(item.name);
+        });
+        return actorArr.join("、");
+      });
+      _this.$element.find(".search-result").append($node);
+    });
   }
-}
+};
 
 var app = {
   init: function() {
