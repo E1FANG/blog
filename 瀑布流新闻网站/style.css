@@ -1,0 +1,48 @@
+html,
+body,
+ul,
+li,
+p {
+  margin: 0;
+  padding: 0;
+}
+ul,
+li {
+  list-style: none;
+}
+
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.ct {
+  position: relative;
+  padding: 10px;
+  margin: 0 auto;
+}
+.ct .item {
+  width: 200px;
+  position: absolute;
+  padding: 0 0 10px 0;
+  box-shadow: 2px 2px 2px #e8e8e8, -2px -2px 2px #e8e8e8;
+  border: 1px solid #dfdfdf;
+  background: #fff;
+  margin: 10px;
+  transition: all 0.8s;
+}
+.ct .item img {
+  margin: 12px;
+  width: 176px;
+}
+.ct .item .header {
+  margin: 0 12px;
+}
+.ct .desp {
+  font-size: 12px;
+  line-height: 1.8;
+  margin: 10px 15px 0;
+  color: #777371;
+}
+#load {
+}

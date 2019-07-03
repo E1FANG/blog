@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./jquery-3.2.1.js"></script>
+  </head>
+  <body>
+    <div class="ct-waterfall">
+      <ul id="pic-ct" class="ct clearfix">
+        <!--<li class="item">
+    			<a href="#" class="link">
+    				<img src="http://s.img.mix.sina.com.cn/auto/resize?img=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F5_img%2F2016_09%2F453_75615_657883.jpg&size=250_0" alt="">
+    			</a>
+    			<h4 class="header">标题</h4>
+    			<p class="desp">
+    				当地时间2016年3月1日，在东部与亲俄武装作战中受伤的乌克兰士兵接受海豚治疗。
+    			</p>
+    		</li>-->
+      </ul>
+      <div id="load">我是看不见的</div>
+    </div>
+
+    <script>
+      var curPage = 1,
+        perPageCount = 10;
+      var colSumHeight = [];
+      var nodeWidth = $(".item").outerWidth(true);
+      var colNum = parseInt($("#pic-ct").width() / nodeWidth);
+
+      var $target = $("#load");
+
+      $(window).on("scroll", function() {
+        checkShow();
+      });
+
+      checkShow();
+
+      function checkShow() {
+        if (isShow($target)) {
+          dosth();
+        }
+      }
+
+      function isShow($el) {
+        var scrollH = $(window).scrollTop(),
+          winH = $(window).height(),
+          top = $el.offset().top;
+
+        if (top < scrollH + winH) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      function dosth() {
+        //获取数据
+        $.ajax({
+          url: "https://photo.sina.cn/aj/v2/index?cate=military",
+          type: "get",
+          dataType: "jsonp",
+          jsonp: "jsoncallback",
+          data: {
+            app_key: "1271687855",
+            format: "json",
+            size: "img",
+            num: perPageCount,
+            page: curPage
+          },
+          success: function(ret) {
+            if (ret.code == "1") {
+              var dataArr = ret.data;
+
+              var $nodes = renderData(dataArr);
+              render($nodes);
+
+              curPage++;
+            }
+          }
+        });
+      }
+
+      function render($nodes) {
+        var nodeWdith = $nodes.outerWidth(true),
+          colNum = parseInt($(window).width() / nodeWdith);
+        console.log(colSumHeight);
+        if (colSumHeight.length == 0) {
+          for (var i = 0; i < colNum; i++) {
+            colSumHeight.push(0);
+          }
+        }
+
+        $nodes.each(function() {
+          var $cur = $(this);
+
+          //colSumHeight = [100, 250, 80, 200]
+
+          var idx = 0,
+            minSumHeight = colSumHeight[0];
+
+          for (var i = 0; i < colSumHeight.length; i++) {
+            if (colSumHeight[i] < minSumHeight) {
+              idx = i;
+              minSumHeight = colSumHeight[i];
+            }
+          }
+
+          $cur.css({
+            left: nodeWdith * idx,
+            top: minSumHeight
+          });
+          colSumHeight[idx] = $cur.outerHeight(true) + colSumHeight[idx];
+        });
+      }
+
+      //   render();
+
+      function renderData(items) {
+        console.log(items);
+        var tpl = "",
+          $nodes;
+        for (var i = 0; i < items.length; i++) {
+          tpl += '<li class="item">';
+          tpl +=
+            '<a href="#" class="link"><img src=""' +
+            items.thumb +
+            '" alt=""></a>';
+          tpl += '<h4 class="header"' + items.stitle + "</h4>";
+          tpl += '<p class="desp">' + items.title + "</p>";
+          tpl += "</li>";
+        }
+        $nodes = $(tpl);
+        console.log($nodes[2]);
+        $("#pic-ct").append($nodes);
+        return $nodes;
+      }
+    </script>
+  </body>
+</html>
