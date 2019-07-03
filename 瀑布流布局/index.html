@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="./jquery-3.2.1.js"></script>
+    <meta charset="utf-8" />
+    <title>瀑布流布局</title>
+    <style>
+      .waterfall {
+        /* max-width: 900px;
+        margin: 0 auto; */
+      }
+      .waterfall img {
+        width: 100px;
+        margin: 10px;
+        position: absolute;
+        transition: all 0.4s;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="waterfall">
+      <img src="http://via.placeholder.com/100x100" alt="300*100" />
+      <img src="http://via.placeholder.com/100x70" alt="300*70" />
+      <img src="http://via.placeholder.com/100x150" alt="300*150" />
+      <img src="http://via.placeholder.com/100x250" alt="300*250" />
+      <img src="http://via.placeholder.com/100x80" alt="300*80" />
+      <img src="http://via.placeholder.com/100x90" alt="300*90" />
+      <img src="http://via.placeholder.com/100x120" alt="300*120" />
+      <img src="http://via.placeholder.com/100x210" alt="300*210" />
+      <img src="http://via.placeholder.com/100x230" alt="300*230" />
+      <img src="http://via.placeholder.com/100x100" alt="300*100" />
+      <img src="http://via.placeholder.com/100x70" alt="300*70" />
+      <img src="http://via.placeholder.com/100x150" alt="300*150" />
+      <img src="http://via.placeholder.com/100x250" alt="300*250" />
+      <img src="http://via.placeholder.com/100x80" alt="300*80" />
+      <img src="http://via.placeholder.com/100x90" alt="300*90" />
+      <img src="http://via.placeholder.com/100x120" alt="300*120" />
+      <img src="http://via.placeholder.com/100x210" alt="300*210" />
+      <img src="http://via.placeholder.com/100x230" alt="300*230" />
+    </div>
+
+    <script>
+      // var colCount;
+      // var colHeightArray = [];
+      // var imgWidth = $(".waterfall img").outerWidth(true);
+      // colCount = Math.floor($(".waterfall").width() / imgWidth);
+      // console.log(colCount);
+
+      // for (var i = 0; i < colCount; i++) {
+      //   colHeightArray[i] = 0;
+      // }
+
+      // $(".waterfall img").on("load", function() {
+      //   var minValue = colHeightArray[0];
+      //   var minIndex = 0;
+      //   for (var i = 0; i < colCount; i++) {
+      //     if (colHeightArray[i] < minValue) {
+      //       minValue = colHeightArray[i];
+      //       minIndex = i;
+      //     }
+      //   }
+      //   $(this).css({
+      //     left: imgWidth * minIndex,
+      //     top: minValue
+      //   });
+      //   colHeightArray[minIndex] += $(this).outerHeight(true);
+      // });
+
+      // $(window).on('resize', function(){
+      // colHeightArray = [];
+      // imgWidth = $(".waterfall img").outerWidth(true);
+      // colCount = Math.floor($('.waterfall').width()/imgWidth)
+      // console.log(colCount);
+
+      // for (var i = 0; i < colCount; i++) {
+      //   colHeightArray[i] = 0;
+      // }
+
+      // $(".waterfall img").each( function() {
+      //   var minValue = colHeightArray[0];
+      //   var minIndex = 0;
+      //   for (var i = 0; i < colCount; i++) {
+      //     if (colHeightArray[i] < minValue) {
+      //       minValue = colHeightArray[i];
+      //       minIndex = i;
+      //     }
+      //   }
+      //   $(this).css({
+      //     left: imgWidth * minIndex,
+      //     top: minValue
+      //   });
+      //   colHeightArray[minIndex] += $(this).outerHeight(true);
+      // });
+
+      // })
+
+      var colCount;
+      var colHeightArray = [];
+      var imgWidth = $(".waterfall img").outerWidth(true);
+
+      colCount = Math.floor($(".waterfall").width() / imgWidth);
+
+      for (var i = 0; i < colCount; i++) {
+        colHeightArray[i] = 0;
+      }
+      // [100, 0, 0]
+
+      $(".waterfall img").on("load", function() {
+        var minValue = colHeightArray[0]; //0
+        var minIndex = 0; //0
+
+        for (var i = 0; i < colCount; i++) {
+          if (colHeightArray[i] < minValue) {
+            minValue = colHeightArray[i];
+            minIndex = i;
+          }
+        }
+
+        //  console.log(minIndex)
+        $(this).css({
+          left: minIndex * imgWidth,
+          top: minValue
+        });
+        console.log($(this).outerHeight(true));
+        colHeightArray[minIndex] += $(this).outerHeight(true);
+        console.log(colHeightArray);
+      });
+      $(window).on("resize", function() {
+        colHeightArray = [];
+        colCount = Math.floor($(".waterfall").width() / imgWidth);
+        for (var i = 0; i < colCount; i++) {
+          colHeightArray[i] = 0;
+        }
+        $(".waterfall img").each(function() {
+          var minValue = colHeightArray[0]; //0
+          var minIndex = 0; //0
+
+          for (var i = 0; i < colCount; i++) {
+            if (colHeightArray[i] < minValue) {
+              minValue = colHeightArray[i];
+              minIndex = i;
+            }
+          }
+
+          $(this).css({
+            left: minIndex * imgWidth,
+            top: minValue
+          });
+          console.log($(this).outerHeight(true));
+          colHeightArray[minIndex] += $(this).outerHeight(true);
+          console.log(colHeightArray);
+        });
+      });
+    </script>
+  </body>
+</html>
