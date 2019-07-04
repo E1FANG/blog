@@ -1,0 +1,245 @@
+html,
+body,
+section {
+  height: 100%;
+  overflow: hidden;
+}
+/* 百分之百的高度要逐级往上涨才有用
+    所有section要百分百高的话 它的上层body也要百分之百高，以此类推 html也是
+*/
+
+.layout {
+  margin: 0 auto;
+  width: 600px;
+}
+/* 响应格式设置 */
+@media (min-width: 700px) {
+  .layout {
+    width: 600px;
+  }
+}
+@media (min-width: 900px) {
+  .layout {
+    width: 800px;
+  }
+}
+@media (min-width: 1000px) {
+  .layout {
+    width: 900px;
+  }
+}
+@media (min-width: 1200px) {
+  .layout {
+    width: 1100px;
+  }
+}
+
+#page-cover {
+  display: none;
+}
+
+/* 背景样式 */
+.bg {
+  position: absolute;
+  z-index: -1;
+  left: -10px;
+  top: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-big)
+    center center no-repeat;
+  background-size: cover;
+  filter: blur(4px);
+}
+.bg::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+main {
+  padding-top: 12vh;
+  height: calc(100% - 24vh);
+}
+main::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* 歌曲封面侧边栏样式 */
+main .aside {
+  float: left;
+}
+main .aside > figure {
+  width: 46vh;
+  height: 46vh;
+  background: url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-middle)
+    center center no-repeat;
+  background-size: cover;
+}
+main .aside .actions {
+  display: flex;
+  margin-top: 4vh;
+}
+main .aside .iconfont {
+  flex: 1;
+  text-align: center;
+  font-size: 5vh;
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 0.4s;
+  cursor: pointer;
+}
+main .aside .iconfont:hover {
+  color: #fff;
+}
+main .aside .iconfont.active {
+  color: #ff5722;
+}
+
+/* 歌曲信息样式 */
+main .detail {
+  margin-left: 56vh;
+  color: #fff;
+}
+main .detail .tag {
+  font-size: 2vh;
+  padding: 0.4em 0.8em;
+  background: rgba(71, 224, 235, 0.7);
+  border-radius: 0.5vh;
+}
+main .detail h1 {
+  font-size: 6vh;
+  margin-top: 2vh;
+}
+main .icons {
+  display: flex;
+  font-size: 3vh;
+  margin-top: 12vh;
+}
+main .icons li {
+  flex: 1;
+}
+main .icons .iconfont {
+  font-size: 3vh;
+  margin-right: 1vh;
+}
+
+/* 歌曲进度条与时间 */
+main .area-bar {
+  margin-top: 10vh;
+  display: flex;
+  align-items: center;
+}
+main .area-bar .bar {
+  position: relative;
+  flex: 1;
+  height: 0.8vh;
+  border-radius: 0.2vh;
+  background: rgba(255, 255, 255, 0.4);
+}
+main .area-bar .current-time {
+  width: 3vh;
+  font-size: 2vh;
+  margin-left: 1vh;
+}
+main .area-bar .bar-progress {
+  position: absolute;
+  height: 0.8vh;
+  width: 0%;
+  transition: width 0.8s;
+  background-color: #fff;
+  border-radius: 0.2vh;
+}
+
+/* 作者与歌词 */
+main .author {
+  font-size: 2vh;
+  margin-top: 2vh;
+  color: rgba(255, 255, 255, 0.6);
+}
+main .lyric {
+  font-size: 3vh;
+  margin-top: 3vh;
+  color: rgba(255, 255, 255, 1);
+}
+
+/* 歌曲菜单 */
+footer {
+  height: 24vh;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0px -0.25vh 0.25vh 0.25vh rgba(255, 255, 255, 0.2);
+}
+footer > .layout {
+  position: relative;
+}
+footer .box {
+  position: relative;
+  overflow: hidden;
+  height: 24vh;
+}
+footer ul {
+  position: absolute;
+  left: 0;
+}
+footer ul:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+footer li {
+  float: left;
+  margin: 2vh 2vh 0 2vh;
+  width: 20vh;
+  height: 20vh;
+  text-align: center;
+  cursor: pointer;
+}
+footer li:hover,
+footer li.active {
+  box-shadow: 0 0 0.5vh 0.5vh rgba(255, 255, 255, 0.8);
+}
+footer li .cover {
+  height: 16vh;
+  background-size: cover;
+  background-position: center center;
+}
+footer h3 {
+  font-size: 2vh;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 1vh;
+}
+
+/* 菜单切换图标 */
+footer .iconfont {
+  position: absolute;
+  top: 4vh;
+  font-size: 6vh;
+  color: rgba(255, 255, 255, 0.4);
+  opacity: 0;
+  transition: all 0.4s;
+  cursor: pointer;
+}
+footer:hover .iconfont {
+  opacity: 1;
+}
+footer .iconfont:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+footer .icon-left {
+  left: -8vh;
+}
+footer .icon-right {
+  right: -8vh;
+}
+
+/* 歌词格式 */
+.boomText {
+  opacity: 0;
+  display: inline-block;
+}
