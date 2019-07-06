@@ -78,10 +78,16 @@ main .aside {
 main .aside > figure {
   width: 46vh;
   height: 46vh;
-  background: url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-middle)
-    center center no-repeat;
+  background: url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-middle) center center no-repeat;
   background-size: cover;
 }
+/* main .aside > figure{
+  width: 46vh;
+  height: 46vh;
+  background-image: url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-middle);
+  background-size: cover;
+  position-position: center center;
+} */
 main .aside .actions {
   display: flex;
   margin-top: 4vh;
