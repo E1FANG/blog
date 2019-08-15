@@ -1,8 +1,0 @@
-.fade-enter-acive,.fade-leave-acive {
-    transition: all 1300ms ease;
-    transform: translateY(0)
-}
-
-.fade-enter ,.fade-leave-to {
-    transform: translateY(100%)
-}
