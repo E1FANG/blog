@@ -232,6 +232,9 @@ body {
 }
 
 @media (max-width: 430px) {
+  html,body{
+    width: 100%;
+  }
   .wrapper{
     display: flex;
     flex-wrap: wrap;
@@ -289,11 +292,13 @@ body {
 
 
 .more ul span{
-  border-bottom: 2px solid rgba(247, 25, 25, 0.466);
-  color:rgba(10, 10, 10, 0.466);
+  border-bottom: 1px solid rgba(255, 57, 57, 0.466);
+  font-weight:bold;
+  /* color:rgba(10, 10, 10, 0.466); */
 }
 
 .about-me span{
-  border-bottom: 2px solid rgba(247, 25, 25, 0.466);
-  color:rgba(10, 10, 10, 0.466);
+  border-bottom: 1px solid rgba(255, 57, 57, 0.466);
+  font-weight:bold;
+  /* color:rgba(10, 10, 10, 0.466); */
 }
