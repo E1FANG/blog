@@ -1,0 +1,24 @@
+
+/* pages/history/history.wxss */
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  padding: 40rpx;
+}
+
+.title {
+  font-size: 26rpx;
+  color: #8995a1;
+}
+.item {
+  margin-top: 40rpx;
+}
+
+.item .query {
+  color: #8995a1;
+}
+
+.item .result {
+  margin-top: 16rpx;
+}

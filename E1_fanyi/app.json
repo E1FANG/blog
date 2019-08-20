@@ -1,0 +1,31 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/change/change",
+    "pages/history/history"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "E1翻译",
+    "navigationBarTextStyle": "black",
+    "backgroundColor":"#333"
+  },
+  "tabBar": {
+    "borderStyle": "white",
+    "position":"top",
+    "color":"#595959",
+    "selectedColor": "#1c1b21",
+    "list": [
+      {
+      "pagePath": "pages/index/index",
+      "text": "翻译"
+      },
+      {
+        "pagePath": "pages/history/history",
+        "text": "历史"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}
