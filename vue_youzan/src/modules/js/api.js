@@ -22,7 +22,7 @@ let url = {
 //开发环境和真实环境的切换
 
 // let host = ''
-let host = 'http://rap2api.taobao.org/app/mock/7058'
+let host = ' https://www.easy-mock.com/mock/5d6e19f1772c3b4fe195e751/example'
 
 //在所有url的值前面加上host
 for(let key in url){
